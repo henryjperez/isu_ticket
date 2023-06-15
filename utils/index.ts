@@ -1,1 +1,1 @@
-export const test = "value";
+export * from "./colors";
