@@ -11,11 +11,13 @@ export const Text = (props: TextProps) => {
 		return StyleSheet.create({
 			txt: {
 				fontSize: 16,
+				fontFamily: "nunito",
+				color: theme.texts.body,
 			}
 		});
 	});
-	const { color = "red" } = props;
-	const style = [styles.txt, { color }, props.style];
+	const { color } = props;
+	const style = [styles.txt, color ?? {}, props.style];
 
 	return (
 		<Txt {...{...props, style}}>{props.children}</Txt>

@@ -1,10 +1,24 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 
-export const MenuTrigger = () => {
+import { Icon } from "@components/text/icon";
+import { useStyles, useTheme } from "@hooks";
+
+interface MenuTriggerProps {
+	onPress: () => void;
+}
+export const MenuTrigger = (props: MenuTriggerProps) => {
+	const theme = useTheme();
+	const styles = useStyles((theme, device) => {
+		return StyleSheet.create({
+			container: {
+
+			},
+		});
+	});
+
 	return (
-		<View>
-			<Text>MenuTrigger</Text>
-		</View>
+		<TouchableOpacity onPress={props.onPress}>
+			<Icon name='menu' size={30} color={theme.icons.dark_contrast} />
+		</TouchableOpacity>
 	)
 }

@@ -22,7 +22,6 @@ export const GoBackButton = () => {
 	return (
 		<TouchableOpacity onPress={handleGoBack}>
 			<Icon name='arrow-back-ios' size={30} color={theme.icons.dark_contrast} />
-			<Text>Go Back</Text>
 		</TouchableOpacity>
 	)
 }

@@ -9,15 +9,17 @@ export const Card = (props: CardProps) => {
 	const styles = useStyles((theme, device) => {
 		return StyleSheet.create({
 			container: {
-				fontSize: 16,
 				backgroundColor: theme.body.contrast,
+				borderRadius: 10,
+				padding: 10,
+				paddingHorizontal: 20,
 			}
 		});
 	});
 	const style = [styles.container, props.style];
 
 	return (
-		<View {...props}>
+		<View {...{...props, style}}>
 			{props.children}
 		</View>
 	)
