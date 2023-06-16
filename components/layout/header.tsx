@@ -12,7 +12,6 @@ export interface HeaderProps {
 	title: string;
 }
 export const Header = (props: HeaderProps) => {
-
 	const styles = useStyles((theme, device) => {
 		return StyleSheet.create({
 			container: {
@@ -20,11 +19,13 @@ export const Header = (props: HeaderProps) => {
 				alignItems: "center",
 				flexDirection: "row",
 				padding: 10,
+				backgroundColor: theme.colors.primary,
 			},
 			title_container: {
 				width: "40%",
 				justifyContent: "center",
 				alignItems: "center",
+				fontWeight: "bold",
 			},
 			button_container: {
 				width: "30%",

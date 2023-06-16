@@ -12,6 +12,7 @@ export const H2 = (props: H2Props) => {
 			h2: {
 				color: theme.texts.title,
 				fontWeight: "bold",
+				fontSize: 17,
 			}
 		});
 	});

@@ -6,6 +6,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { Text, Header, FlashMessage, Menu, MenuOption, MenuTrigger, GoBackButton } from "@components";
+import { useTheme } from "@hooks";
 
 export default function Layout() {
 	const [showMenu, setShowMenu] = useState(false);
@@ -14,6 +15,7 @@ export default function Layout() {
 		nunito: require('../assets/fonts/Nunito-Medium.ttf'),
 		...FontAwesome.font,
 	});
+	// const theme = useTheme();
 	const routes = [
 		{
 			path: "dashboard",
@@ -56,7 +58,11 @@ export default function Layout() {
 						rightMenu={() => {
 							return (
 								<>
-									<MenuTrigger onPress={() => setShowMenu(!showMenu)} />
+									{
+										navProps.route.name !== "login" &&
+										navProps.route.name !== "register" &&
+										<MenuTrigger onPress={() => setShowMenu(!showMenu)} />
+									}
 									{showMenu && (
 										<Menu>
 											{/* @ts-ignore */}
@@ -85,7 +91,9 @@ export default function Layout() {
 						}}
 					/>
 				);
-			} }} />
+			} }}>
+				<Stack.Screen name="index" options={{ headerShown: false }} />
+			</Stack>
 		</SafeAreaProvider>
 		</TouchableWithoutFeedback>
 	)

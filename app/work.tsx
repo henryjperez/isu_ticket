@@ -1,19 +1,29 @@
 import { StyleSheet, Text, View } from 'react-native'
-import { useRouter } from "expo-router";
+import { useRouter, useSearchParams } from "expo-router";
 
-import { Button } from "@components";
+import { Button, Card, H1 } from "@components";
 
 const WorkScreen = () => {
 	const router = useRouter();
+	// const { id } = useSearchParams();
 	function handleGetDirections() {
 		router.push("directions");
 	}
 
 	return (
-		<View>
-			<Text>WorkScreen</Text>
-			<Button onPress={handleGetDirections}>Directions</Button>
-		</View>
+		<Card>
+			<View>
+				<H1>Ticket #2</H1>
+			</View>
+			<View>
+				<Card>
+					<Button onPress={handleGetDirections}>Get Directions</Button>
+				</Card>
+				<Card>
+					<Button>Get Directions</Button>
+				</Card>
+			</View>
+		</Card>
 	)
 }
 

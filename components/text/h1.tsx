@@ -12,6 +12,7 @@ export const H1 = (props: H1Props) => {
 			h1: {
 				color: theme.texts.title,
 				fontWeight: "bold",
+				fontSize: 20,
 			}
 		});
 	});

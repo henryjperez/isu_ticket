@@ -15,10 +15,13 @@ export const Button = (props: ButtonProps) => {
 	const styles = useStyles((theme, device) => {
 		return StyleSheet.create({
 			container: {
-				backgroundColor: "red",
+				backgroundColor: theme.buttons.background,
 				borderRadius: 10,
 				justifyContent: "center",
 				alignItems: "center",
+			},
+			text: {
+				color: theme.buttons.text,
 			}
 		});
 	}) 
@@ -26,7 +29,7 @@ export const Button = (props: ButtonProps) => {
 		<TouchableOpacity onPress={props.onPress} style={[styles.container, { width, height }, props.style]}>
 			{
 				typeof props.children === "string" ?
-				<Text>{props.children}</Text> : props.children
+				<Text style={styles.text}>{props.children}</Text> : props.children
 			}
 		</TouchableOpacity>
 	)
