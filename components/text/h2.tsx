@@ -3,18 +3,18 @@ import { StyleSheet } from 'react-native';
 import { useStyles } from "@hooks";
 import { Text, TextProps } from "./text";
 
-interface H1Props extends TextProps {
+interface H2Props extends TextProps {
 
 }
-export const H1 = (props: H1Props) => {
+export const H2 = (props: H2Props) => {
 	const styles = useStyles((theme, device) => {
 		return StyleSheet.create({
-			h1: {
+			h2: {
 				color: theme.texts.title,
 				fontWeight: "bold",
 			}
 		});
 	});
 
-	return <Text {...props} style={styles.h1} />
+	return <Text {...props} style={styles.h2} />
 }

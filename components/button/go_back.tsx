@@ -2,7 +2,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native'
 import { useRouter } from "expo-router";
 
 import { useStyles, useTheme } from "@hooks";
-import { Icon, Text } from "@components";
+import { Icon, Text } from "@components/text";
 
 export const GoBackButton = () => {
 	const router = useRouter();

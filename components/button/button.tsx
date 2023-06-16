@@ -1,5 +1,5 @@
 import { TouchableOpacity, StyleSheet, ViewStyle } from 'react-native'
-import { Text } from "@components";
+import { Text } from "@components/text";
 
 export interface ButtonProps {
 	children: JSX.Element | string;

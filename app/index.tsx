@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import { Button, Icon } from "@components";
+import { Button, Icon, Input } from "@components";
 
 const Entry = () => {
 	return (
@@ -8,6 +8,7 @@ const Entry = () => {
 			<Text>Entry</Text>
 			<Button>Peter</Button>
 			<Icon family='material' size={42} name='addchart' />
+			<Input secureTextEntry />
 		</View>
 	)
 }
