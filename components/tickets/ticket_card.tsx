@@ -10,13 +10,16 @@ export interface Ticket {
 	id: number,
 	name: string;
 	date: string;
-	coordinates: number[];
+	phone: string;
+	address: string;
+	longitude: number;
+	latitude: number;
 }
 export interface TicketCardProps {
 	ticket: Ticket;
 }
 export const TicketCard = (props: TicketCardProps) => {
-	const { id, name, date, coordinates } = props.ticket;
+	const { id, name, date, address, phone } = props.ticket;
 	const router = useRouter();
 	const styles = useStyles((theme, device) => {
 		return StyleSheet.create({
@@ -31,7 +34,7 @@ export const TicketCard = (props: TicketCardProps) => {
 
 	function handleOnPress() {
 		// router.setParams({ id: String(id) });
-		router.push("work");
+		router.push({ pathname: "work", params: {...props.ticket}});
 	}
 
 	return (
@@ -40,6 +43,8 @@ export const TicketCard = (props: TicketCardProps) => {
 				<H2>{name}</H2>
 				<Text>#{id}</Text>
 				<Text>{date}</Text>
+				<Text>{address}</Text>
+				<Text>{phone}</Text>
 			</View>
 			<View>
 				<Button width={100} onPress={handleOnPress}>View</Button>

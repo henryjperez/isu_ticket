@@ -42,6 +42,7 @@ const Directions = () => {
 					draggable
 					coordinate={destination}
 					onDragEnd={(direction) => setDestination(direction.nativeEvent.coordinate)}
+					pinColor="blue"
 				/>
 				<Polyline
 					coordinates={[origin, destination]}

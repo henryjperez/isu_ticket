@@ -1,5 +1,5 @@
 const primaryLight = "#F25287";
-const primaryDark = "#F25287";
+const primaryDark = "#0E2954";
 
 export interface ColorsTheme {
 	colors: AppColorsTheme;
@@ -7,6 +7,7 @@ export interface ColorsTheme {
 	icons: IconTheme;
 	texts: TextTheme;
 	buttons: ButtonsTheme;
+	notifications: NotificationsTheme;
 }
 interface TextTheme {
 	title: string;
@@ -28,28 +29,40 @@ interface ButtonsTheme {
 	background: string;
 	text: string;
 }
+interface NotificationsTheme {
+	success: string;
+	alert: string;
+	info: string;
+	error: string;
+}
 
 const dark: ColorsTheme = {
 	body: {
-		background: "red",
-		contrast: "blue",
+		background: "#27374D",
+		contrast: "#6E85B2",
 	},
 	colors: {
-		primary: "blue",
-		secondary: "red",
+		primary: primaryDark,
+		secondary: "#1F6E8C",
 	},
 	icons: {
-		dark_contrast: "black",
-		light_contrast: "white",
+		dark_contrast: "white",
+		light_contrast: "black",
 	},
 	texts: {
-		body: "red",
-		title: "blue",
+		body: "#EEEEEE",
+		title: primaryDark,
 	},
 	buttons: {
 		background: primaryDark,
 		text: "#fff",
 	},
+	notifications: {
+		success: "#00DFA2",
+		alert: "#FFE569",
+		info: "#9DB2BF",
+		error: "#CD1818",
+	}
 }
 
 const light: ColorsTheme = {
@@ -73,6 +86,12 @@ const light: ColorsTheme = {
 		background: primaryLight,
 		text: "#fff",
 	},
+	notifications: {
+		success: "#00DFA2",
+		alert: "#FFE569",
+		info: "#9DB2BF",
+		error: "#CD1818",
+	}
 }
 
 export const colors = { dark, light };

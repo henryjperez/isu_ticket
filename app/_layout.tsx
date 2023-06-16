@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { TouchableWithoutFeedback } from "react-native";
+import { TouchableWithoutFeedback, TouchableOpacity } from "react-native";
 import { Stack, ErrorBoundary, SplashScreen, useRouter } from "expo-router";
 import { useFonts } from 'expo-font';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { Text, Header, FlashMessage, Menu, MenuOption, MenuTrigger, GoBackButton } from "@components";
+import { Text, Header, Menu, MenuOption, MenuTrigger, GoBackButton, Icon } from "@components";
 import { useTheme } from "@hooks";
 
 export default function Layout() {
 	const [showMenu, setShowMenu] = useState(false);
 	const router = useRouter();
+	const theme = useTheme();
 	const [loaded, error] = useFonts({
 		nunito: require('../assets/fonts/Nunito-Medium.ttf'),
 		...FontAwesome.font,
@@ -50,7 +51,6 @@ export default function Layout() {
 			}
 		}}>
 		<SafeAreaProvider>
-			<FlashMessage />
 			<Stack screenOptions={{ header: (navProps) => {
 				return (
 					<Header
@@ -59,8 +59,16 @@ export default function Layout() {
 							return (
 								<>
 									{
+										navProps.route.name === "dashboard" ? (
+											<TouchableOpacity onPress={() => navigateHandler("new_ticket")} style={{marginHorizontal: 5}}>
+												<Icon family="fw" name="plus" size={30} color={theme.icons.dark_contrast} />
+											</TouchableOpacity>
+										) : null
+									}
+									{
 										navProps.route.name !== "login" &&
 										navProps.route.name !== "register" &&
+										navProps.route.name !== "new_ticket" &&
 										<MenuTrigger onPress={() => setShowMenu(!showMenu)} />
 									}
 									{showMenu && (

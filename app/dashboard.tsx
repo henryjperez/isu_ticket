@@ -1,50 +1,36 @@
+import { useEffect, useState, useCallback } from "react";
 import { StyleSheet, Text, View, FlatList } from 'react-native'
-import { useRouter } from "expo-router";
+import { useFocusEffect } from "expo-router";
 
-import { Button, TicketCard, } from "@components";
-import { Ticket } from "@interfaces";
+import { TicketCard, } from "@components";
+import { useTheme, useDatabase } from "@hooks";
 
-const tickets: Ticket[] = [
-	{
-		id: 1,
-		name: "Buying Card",
-		date: "13-06-2007",
-		coordinates: [43.48867303159076, -80.49331292380043],
-	},
-	{
-		id: 2,
-		name: "Fancy Dinner",
-		date: "01-08-2004",
-		coordinates: [43.47092317243294, -80.44996842907183],
-	},
-	{
-		id: 3,
-		name: "HP Laptop",
-		date: "23-01-2020",
-		coordinates: [43.48039041289636, -80.4776917395616],
-	},
-	{
-		id: 4,
-		name: "Phone",
-		date: "05-03-2014",
-		coordinates: [43.41456386675492, -80.51374030128373],
-	},
-	{
-		id: 5,
-		name: "Rent Boat",
-		date: "17-08-2011",
-		coordinates: [43.4819488867488, -80.56903912334258],
-	},
-];
 
 const Dashboard = () => {
-	const router = useRouter();
-	function handleWorkingTicket() {
-		router.push("work");
-	}
+	const [tickets, setTickets] = useState([]);
+	const db = useDatabase();
+	const theme = useTheme();
+	
+	useFocusEffect(useCallback(() => {
+		db.transaction(tx => {
+			tx.executeSql(
+				`SELECT * FROM tickets`,
+				null,
+				(txObject, resultSet) => {
+					if (resultSet.rows.length) {
+						setTickets(resultSet.rows._array);
+					}
+				},
+				(txObject, err) => console.error(err)
+			);
+		});
+
+
+	}, []));
+	
 
 	return (
-		<View>
+		<View style={{backgroundColor: theme.body.background}}>
 			<FlatList
 				data={tickets}
 				keyExtractor={(ticket) => String(ticket.id)}

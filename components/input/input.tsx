@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TextInput, TextInputProps, TextStyle, StyleSheet, View, TouchableOpacity } from 'react-native'
 
-import { Icon } from "@components";
+import { Icon } from "@components/text";
 import { useStyles } from "@hooks";
 
 interface InputProps extends TextInputProps {
