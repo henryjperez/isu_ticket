@@ -15,6 +15,9 @@
 			"@utils/*": ["./utils/*"],
 			"@utils": ["./utils/index"],
 
+			"@store/*": ["./store/*"],
+			"@store": ["./store/index"],
+
 			"@assets/*": ["./assets/*"]
 		}
 	}
