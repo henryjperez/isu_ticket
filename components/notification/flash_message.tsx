@@ -5,7 +5,7 @@ import { useStyles } from "@hooks";
 import { IconName } from "@interfaces";
 import { Text } from "@components/text";
 
-interface FlashMessageProps {
+export interface FlashMessageProps {
 	onAnimationEnd: () => void;
 	duration: number;
 	message: string;

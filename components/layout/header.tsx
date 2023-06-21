@@ -1,9 +1,7 @@
 import { StyleSheet, View } from 'react-native'
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { GoBackButton } from "@components/button";
 import { Text } from "@components/text";
-import { Menu, MenuTrigger, MenuOption } from "@components/menu";
 import { useStyles } from "@hooks";
 
 export interface HeaderProps {

@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TouchableWithoutFeedback, TouchableOpacity } from "react-native";
 import { Stack, ErrorBoundary, SplashScreen, useRouter } from "expo-router";
 import { useFonts } from 'expo-font';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { Text, Header, Menu, MenuOption, MenuTrigger, GoBackButton, Icon } from "@components";
+import { Text, Header, Menu, MenuOption, MenuTrigger, GoBackButton, Icon, Calendar } from "@components";
 import { useTheme } from "@hooks";
 
 export default function Layout() {
@@ -57,7 +57,7 @@ export default function Layout() {
 						title={navProps.route.name}
 						rightMenu={() => {
 							return (
-								<>
+								<React.Fragment>
 									{
 										navProps.route.name === "dashboard" ? (
 											<TouchableOpacity onPress={() => navigateHandler("new_ticket")} style={{marginHorizontal: 5}}>
@@ -91,11 +91,16 @@ export default function Layout() {
 											}
 										</Menu>
 									)}
-								</>
+								</React.Fragment>
 							);
 						}}
 						leftMenu={() => {
-							return <GoBackButton />
+							return (
+								<React.Fragment>
+									<GoBackButton />
+									<Calendar />
+								</React.Fragment>
+							)
 						}}
 					/>
 				);

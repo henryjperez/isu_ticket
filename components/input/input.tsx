@@ -4,7 +4,7 @@ import { TextInput, TextInputProps, TextStyle, StyleSheet, View, TouchableOpacit
 import { Icon } from "@components/text";
 import { useStyles } from "@hooks";
 
-interface InputProps extends TextInputProps {
+export interface InputProps extends TextInputProps {
 	style?: TextStyle;
 }
 export const Input = (props: InputProps) => {

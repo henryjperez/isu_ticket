@@ -1,37 +1,45 @@
 {
-  "expo": {
-    "name": "isu_ticket",
-    "slug": "isu_ticket",
-    "version": "1.0.0",
-    "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "package": "com.henryjperez.isu_ticket"
-    },
-    "web": {
-      "bundler": "metro",
-      "favicon": "./assets/images/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "da3c21f6-f1a8-4cf7-b725-e9a3d05425cf"
-      }
-    }
-  }
+	"expo": {
+		"name": "isu_ticket",
+		"slug": "isu_ticket",
+		"version": "1.0.0",
+		"icon": "./assets/images/icon.png",
+		"scheme": "myapp",
+		"userInterfaceStyle": "automatic",
+		"splash": {
+			"image": "./assets/images/splash.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#ffffff"
+		},
+		"assetBundlePatterns": [
+			"**/*"
+		],
+		"ios": {
+			"supportsTablet": true
+		},
+		"android": {
+			"adaptiveIcon": {
+				"foregroundImage": "./assets/images/adaptive-icon.png",
+				"backgroundColor": "#ffffff"
+			},
+			"package": "com.henryjperez.isu_ticket"
+		},
+		"web": {
+			"bundler": "metro",
+			"favicon": "./assets/images/favicon.png"
+		},
+		"extra": {
+			"eas": {
+				"projectId": "da3c21f6-f1a8-4cf7-b725-e9a3d05425cf"
+			}
+		},
+		"plugins": [
+			[
+				"expo-calendar",
+				{
+					"calendarPermission": "ISU Ticket needs to access your calendar."
+				}
+			]
+		]
+	}
 }

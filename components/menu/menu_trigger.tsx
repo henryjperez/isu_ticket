@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native'
 import { Icon } from "@components/text/icon";
 import { useStyles, useTheme } from "@hooks";
 
-interface MenuTriggerProps {
+export interface MenuTriggerProps {
 	onPress: () => void;
 }
 export const MenuTrigger = (props: MenuTriggerProps) => {

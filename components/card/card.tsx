@@ -2,7 +2,7 @@ import { View, ViewProps, ViewStyle, StyleSheet } from 'react-native'
 
 import { useStyles } from "@hooks";
 
-interface CardProps extends ViewProps {
+export interface CardProps extends ViewProps {
 	style?: ViewStyle;
 }
 export const Card = (props: CardProps) => {
