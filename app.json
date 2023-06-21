@@ -21,11 +21,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.henryjperez.isu_ticket"
     },
     "web": {
       "bundler": "metro",
       "favicon": "./assets/images/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "da3c21f6-f1a8-4cf7-b725-e9a3d05425cf"
+      }
     }
   }
 }
