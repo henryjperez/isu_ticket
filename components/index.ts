@@ -1,5 +1,6 @@
 export * from "./notification";
 export * from "./tickets";
+export * from "./pop_up";
 export * from "./button";
 export * from "./layout";
 export * from "./input";

@@ -3,6 +3,7 @@ import { useRouter } from "expo-router";
 
 import { useStyles, useTheme } from "@hooks";
 import { Icon, Text } from "@components/text";
+import { HEADER_ICON_SIZE } from "@utils";
 
 export const GoBackButton = () => {
 	const router = useRouter();
@@ -21,7 +22,7 @@ export const GoBackButton = () => {
 
 	return (
 		<TouchableOpacity onPress={handleGoBack}>
-			<Icon name='arrow-back-ios' size={30} color={theme.icons.dark_contrast} />
+			<Icon name='arrow-back-ios' size={HEADER_ICON_SIZE} color={theme.icons.dark_contrast} />
 		</TouchableOpacity>
 	)
 }

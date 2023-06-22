@@ -6,6 +6,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { Text, Header, Menu, MenuOption, MenuTrigger, GoBackButton, Icon, Calendar } from "@components";
+import { HEADER_ICON_SIZE } from "@utils";
 import { useTheme } from "@hooks";
 
 export default function Layout() {
@@ -61,7 +62,7 @@ export default function Layout() {
 									{
 										navProps.route.name === "dashboard" ? (
 											<TouchableOpacity onPress={() => navigateHandler("new_ticket")} style={{marginHorizontal: 5}}>
-												<Icon family="fw" name="plus" size={30} color={theme.icons.dark_contrast} />
+												<Icon family="fw" name="plus" size={HEADER_ICON_SIZE} color={theme.icons.dark_contrast} />
 											</TouchableOpacity>
 										) : null
 									}

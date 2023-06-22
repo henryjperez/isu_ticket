@@ -18,6 +18,7 @@ export const Header = (props: HeaderProps) => {
 				flexDirection: "row",
 				padding: 10,
 				backgroundColor: theme.colors.primary,
+				height: device.height * 0.14,
 			},
 			title_container: {
 				width: "40%",

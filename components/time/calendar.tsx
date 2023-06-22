@@ -4,6 +4,7 @@ import * as ExpoCalendar from 'expo-calendar';
 import { Agenda, Calendar as RNCalendar } from "react-native-calendars";
 
 import { Text, Icon } from "@components/text";
+import { HEADER_ICON_SIZE } from "@utils";
 
 export interface CalendarProps {
 
@@ -47,7 +48,7 @@ export const Calendar = (props: CalendarProps) => {
 
 	return (
 		<TouchableOpacity onPress={createCalendar}>
-			<Icon family="fw" name="calendar" size={30} />
+			<Icon family="fw" name="calendar" size={HEADER_ICON_SIZE} />
 		</TouchableOpacity>
 	)
 }

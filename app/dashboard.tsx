@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import { useFocusEffect } from "expo-router";
 
-import { TicketCard, DatePicker } from "@components";
+import { TicketCard, DatePicker, PopUpBackground } from "@components";
 import { useTheme, useDatabase } from "@hooks";
 
 
@@ -31,7 +31,9 @@ const Dashboard = () => {
 
 	return (
 		<View style={{backgroundColor: theme.body.background}}>
-			<DatePicker />
+			<PopUpBackground>
+				<DatePicker />
+			</PopUpBackground>
 			<FlatList
 				data={tickets}
 				keyExtractor={(ticket) => String(ticket.id)}
