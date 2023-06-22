@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { TouchableWithoutFeedback, TouchableOpacity } from "react-native";
+import { TouchableWithoutFeedback, TouchableOpacity, View } from "react-native";
 import { Stack, ErrorBoundary, SplashScreen, useRouter } from "expo-router";
 import { useFonts } from 'expo-font';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { Text, Header, Menu, MenuOption, MenuTrigger, GoBackButton, Icon, Calendar } from "@components";
-import { HEADER_ICON_SIZE } from "@utils";
+import { HEADER_ICON_SIZE, routes } from "@utils";
 import { useTheme } from "@hooks";
 
 export default function Layout() {
@@ -17,24 +17,10 @@ export default function Layout() {
 		nunito: require('../assets/fonts/Nunito-Medium.ttf'),
 		...FontAwesome.font,
 	});
-	// const theme = useTheme();
-	const routes = [
-		{
-			path: "dashboard",
-			name: "Dashboard",
-		},
-		{
-			path: "work",
-			name: "Work Ticket",
-		},
-		{
-			path: "directions",
-			name: "Get Directions",
-		},
-	];
+	
 	function navigateHandler(path: string) {
 		router.push(path);
-		// setShowMenu(false);
+		setShowMenu(false);
 	}
 
 	useEffect(() => {
@@ -98,8 +84,16 @@ export default function Layout() {
 						leftMenu={() => {
 							return (
 								<React.Fragment>
-									<GoBackButton />
-									<Calendar />
+									{
+										navProps.route.name !== "dashboard" ?
+										<GoBackButton /> : <View style={{ width: HEADER_ICON_SIZE }} />
+									}
+									{
+										navProps.route.name !== "login" &&
+										navProps.route.name !== "register" &&
+										navProps.route.name !== "new_ticket" &&
+										<Calendar />
+									}
 								</React.Fragment>
 							)
 						}}

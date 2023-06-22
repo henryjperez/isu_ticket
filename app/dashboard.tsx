@@ -1,13 +1,14 @@
 import { useEffect, useState, useCallback } from "react";
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 import { useFocusEffect } from "expo-router";
 
-import { TicketCard, DatePicker, PopUpBackground } from "@components";
+import { TicketCard, DatePicker, PopUpBackground, Icon } from "@components";
 import { useTheme, useDatabase } from "@hooks";
 
 
 const Dashboard = () => {
 	const [tickets, setTickets] = useState([]);
+	const [visible, setVisible] = useState(false);
 	const db = useDatabase();
 	const theme = useTheme();
 	
@@ -31,9 +32,6 @@ const Dashboard = () => {
 
 	return (
 		<View style={{backgroundColor: theme.body.background}}>
-			<PopUpBackground>
-				<DatePicker />
-			</PopUpBackground>
 			<FlatList
 				data={tickets}
 				keyExtractor={(ticket) => String(ticket.id)}
@@ -46,6 +44,6 @@ const Dashboard = () => {
 	)
 }
 
-export default Dashboard
+export default Dashboard;
 
-const styles = StyleSheet.create({})
+// const styles = StyleSheet.create({});

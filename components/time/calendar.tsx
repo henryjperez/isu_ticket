@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { View, TouchableOpacity, Platform } from 'react-native';
 import * as ExpoCalendar from 'expo-calendar';
 import { Agenda, Calendar as RNCalendar } from "react-native-calendars";
 
 import { Text, Icon } from "@components/text";
+import { PopUpBackground } from "@components/pop_up";
+import { DatePicker } from "./date_picker";
 import { HEADER_ICON_SIZE } from "@utils";
 
 export interface CalendarProps {
@@ -47,8 +49,13 @@ export const Calendar = (props: CalendarProps) => {
 	}
 
 	return (
-		<TouchableOpacity onPress={createCalendar}>
-			<Icon family="fw" name="calendar" size={HEADER_ICON_SIZE} />
-		</TouchableOpacity>
+		<React.Fragment>
+			<TouchableOpacity onPress={createCalendar}>
+				<Icon family="fw" name="calendar" size={HEADER_ICON_SIZE} />
+			</TouchableOpacity>
+			{/* <PopUpBackground press={{ action: () => {}, visible: true, styles: true, }}>
+				<DatePicker />
+			</PopUpBackground> */}
+		</React.Fragment>
 	)
 }
