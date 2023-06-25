@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { TouchableWithoutFeedback, TouchableOpacity, View } from "react-native";
-import { Stack, ErrorBoundary, SplashScreen, useRouter } from "expo-router";
+import { Stack, SplashScreen, useRouter } from "expo-router";
 import { useFonts } from 'expo-font';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { Text, Header, Menu, MenuOption, MenuTrigger, GoBackButton, Icon, Calendar, Auth, LogoutMenuOption } from "@components";
+import {
+	Text,
+	Header,
+	Menu,
+	MenuOption,
+	MenuTrigger,
+	GoBackButton,
+	Icon,
+	Calendar,
+	Auth,
+	LogoutMenuOption,
+	FlashMessageWrapper } from "@components";
 import { HEADER_ICON_SIZE, routes } from "@utils";
 import { Provider } from "@store";
-import { logout } from "@store/actions";
 import { useTheme } from "@hooks";
 
 
@@ -36,6 +46,7 @@ export default function Layout() {
 
 	return (
 		<Provider>
+			<FlashMessageWrapper />
 			<Auth>
 				<TouchableWithoutFeedback onPress={() => {
 					if (showMenu) {
@@ -109,7 +120,7 @@ export default function Layout() {
 								);
 							}
 						}}>
-							<Stack.Screen name="(auth)" options={{ headerShown: false }} />
+							<Stack.Screen name="(auth)" options={{ headerShown: false,  }} />
 						</Stack>
 					</SafeAreaProvider>
 				</TouchableWithoutFeedback>

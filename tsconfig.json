@@ -18,6 +18,8 @@
 			"@store/*": ["./store/*"],
 			"@store": ["./store/index"],
 
+			"@actions": ["./store/actions"],
+
 			"@assets/*": ["./assets/*"]
 		}
 	}

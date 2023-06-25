@@ -9,7 +9,7 @@ export interface ProviderProps {
 	children: React.ReactNode;
 }
 export const Auth = (props: ProviderProps) => {
-	const isAuth = useSelector((state: State) => state.auth.auth);
+	const isAuth = useSelector((state: State) => state.auth.isAuth);
 
 	useProtectedRoute(isAuth);
 

@@ -1,13 +1,12 @@
+import { useEffect } from 'react'
 import { StyleSheet, View } from 'react-native';
 import { useRouter } from "expo-router";
 import { useDispatch } from "react-redux";
 
 import { Button, Icon, H1, Text } from "@components";
 import { useStyles } from "@hooks";
-import { login, logout } from "@store/actions";
 
 const Entry = () => {
-	const dispatch = useDispatch();
 	const router = useRouter();
 	const styles = useStyles((theme, device) => {
 		return StyleSheet.create({
@@ -20,6 +19,8 @@ const Entry = () => {
 			elements: { margin: 2.5, },
 		});
 	});
+
+	
 
 	function handleLogin() {
 		router.push("/(auth)/login");

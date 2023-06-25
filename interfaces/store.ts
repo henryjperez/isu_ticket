@@ -1,1 +1,8 @@
-export type { State, ProviderProps } from "@store"
+export type {
+	State,
+	ProviderProps,
+	AppDispatch,
+	NotificationsState,
+	FlashMessageState,
+	AuthState,
+} from "@store";
