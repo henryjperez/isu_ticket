@@ -8,3 +8,4 @@ export * from "./text";
 export * from "./card";
 export * from "./menu";
 export * from "./time";
+export * from "./auth";
