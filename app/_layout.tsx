@@ -5,10 +5,12 @@ import { useFonts } from 'expo-font';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { Text, Header, Menu, MenuOption, MenuTrigger, GoBackButton, Icon, Calendar, Auth } from "@components";
+import { Text, Header, Menu, MenuOption, MenuTrigger, GoBackButton, Icon, Calendar, Auth, LogoutMenuOption } from "@components";
 import { HEADER_ICON_SIZE, routes } from "@utils";
 import { Provider } from "@store";
+import { logout } from "@store/actions";
 import { useTheme } from "@hooks";
+
 
 export default function Layout() {
 	const [showMenu, setShowMenu] = useState(false);
@@ -50,7 +52,7 @@ export default function Layout() {
 											return (
 												<React.Fragment>
 													{
-														navProps.route.name === "dashboard" ? (
+														navProps.route.name === "index" ? (
 															<TouchableOpacity onPress={() => navigateHandler("new_ticket")} style={{ marginHorizontal: 5 }}>
 																<Icon family="fw" name="plus" size={HEADER_ICON_SIZE} color={theme.icons.dark_contrast} />
 															</TouchableOpacity>
@@ -64,22 +66,24 @@ export default function Layout() {
 													}
 													{showMenu && (
 														<Menu>
-															{/* @ts-ignore */}
-															{
-																routes.map((route, index) => {
-																	if (route.path == navProps.route.name) {
-																		return null;
-																	}
-																	return (
-																		<MenuOption
-																			onPress={() => navigateHandler(route.path)}
-																			key={`${route.name}-${route.path}-${index}`}
-																		>
-																			{route.name}
-																		</MenuOption>
-																	);
-																})
-															}
+															<React.Fragment>
+																{
+																	routes.map((route, index) => {
+																		if (route.path == navProps.route.name) {
+																			return null;
+																		}
+																		return (
+																			<MenuOption
+																				onPress={() => navigateHandler(route.path)}
+																				key={`${route.name}-${route.path}-${index}`}
+																			>
+																				{route.name}
+																			</MenuOption>
+																		);
+																	})
+																}
+																<LogoutMenuOption />
+															</React.Fragment>
 														</Menu>
 													)}
 												</React.Fragment>
@@ -89,7 +93,7 @@ export default function Layout() {
 											return (
 												<React.Fragment>
 													{
-														navProps.route.name !== "dashboard" ?
+														navProps.route.name !== "index" ?
 															<GoBackButton /> : <View style={{ width: HEADER_ICON_SIZE }} />
 													}
 													{
@@ -105,7 +109,7 @@ export default function Layout() {
 								);
 							}
 						}}>
-							<Stack.Screen name="index" options={{ headerShown: false }} />
+							<Stack.Screen name="(auth)" options={{ headerShown: false }} />
 						</Stack>
 					</SafeAreaProvider>
 				</TouchableWithoutFeedback>

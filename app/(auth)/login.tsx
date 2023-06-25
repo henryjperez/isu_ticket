@@ -1,28 +1,30 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from 'react-native'
-import { useRouter } from "expo-router";
+import { useDispatch } from "react-redux";
 
 import { Input, Icon, H2, Button, FlashMessage } from "@components";
 import { useStyles, useDatabase } from "@hooks";
+import { login } from "@store/actions";
 
 const LoginScreen = () => {
 	const db = useDatabase();
-	const router = useRouter();
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [notification, setNotification] = useState<string | null>(null);
+	const dispatch = useDispatch();
 
 
 	function handleLogin() {
 		db.transaction(tx => {
 			tx.executeSql(
 				`SELECT * FROM users WHERE username = '${username.trim()}' AND password = '${password}'`,
+				// @ts-ignore
 				null,
 				(txObject, resultSet) => {
 					if (resultSet.rows.length) {
 						setNotification("Login successful");
 						setTimeout(() => {
-							router.push("dashboard");
+							dispatch(login());
 						}, 500);
 					} else {
 						setNotification("User not found");
@@ -48,6 +50,7 @@ const LoginScreen = () => {
 		<View style={styles.page}>
 			{
 				typeof notification === "string" && notification ?
+					// @ts-ignore
 					<FlashMessage message={notification} />
 				: null
 			}

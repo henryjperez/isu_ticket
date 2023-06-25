@@ -11,8 +11,4 @@ export const routes = [
 		path: "directions",
 		name: "Get Directions",
 	},
-	{
-		path: "/",
-		name: "Logout",
-	},
 ];

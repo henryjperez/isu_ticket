@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from "react-redux";
+import { Redirect } from "expo-router";
 
 import { useProtectedRoute } from "@hooks";
 import { State } from "@interfaces";

@@ -5,9 +5,9 @@ import { Text } from "@components/text";
 import { useStyles } from "@hooks";
 
 export interface HeaderProps {
-	rightMenu: () => JSX.Element;
-	leftMenu: () => JSX.Element;
-	title: string;
+	rightMenu?: () => JSX.Element;
+	leftMenu?: () => JSX.Element;
+	title: string | (() => JSX.Element);
 }
 export const Header = (props: HeaderProps) => {
 	const styles = useStyles((theme, device) => {
@@ -44,13 +44,15 @@ export const Header = (props: HeaderProps) => {
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={[styles.button_container, styles.left_container]}>
-				{props.leftMenu()}
+				{props.leftMenu ? props.leftMenu() : null}
 			</View>
 			<View style={styles.title_container}>
-				<Text>{props.title}</Text>
+				{
+					typeof (props.title) === "string" ? <Text>{props.title}</Text> : props.title?.()
+				}
 			</View>
 			<View style={[styles.button_container, styles.right_container]}>
-				{props.rightMenu()}
+				{props.rightMenu ? props.rightMenu() : null}
 			</View>
 		</SafeAreaView>
 	)
