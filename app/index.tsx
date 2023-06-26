@@ -5,7 +5,7 @@ import { useFocusEffect, useRouter } from "expo-router";
 import { TicketCard, Checkbox, H1, Button } from "@components";
 import { useDatabase, useStyles, useAppDispatch, useAppSelector } from "@hooks";
 import { Ticket, TicketSelect, AppDispatch } from "@interfaces";
-import { selectTicket, selectTicketMode } from "@actions";
+import { selectTicket, selectTicketMode, resetTicketsSelected } from "@actions";
 import { isEmptyObject } from "@utils";
 
 
@@ -53,7 +53,7 @@ const selectedTicket = (payload: TicketSelect) => ({
 
 const Dashboard = () => {
 	const dispatch = useAppDispatch();
-	const [tickets, dispacher] = useReducer((state: any, action: any) => reducer(state, action, dispatch), []);
+	const [tickets, dispatcher] = useReducer((state: any, action: any) => reducer(state, action, dispatch), []);
 	const { selected: selectedTickets, selectMode } = useAppSelector(state => state.tickets);
 	const db = useDatabase();
 	const router = useRouter();
@@ -73,6 +73,7 @@ const Dashboard = () => {
 	});
 	
 	useFocusEffect(useCallback(() => {
+		dispatch(resetTicketsSelected());
 		db.transaction(tx => {
 			tx.executeSql(
 				`SELECT * FROM tickets`,
@@ -80,7 +81,7 @@ const Dashboard = () => {
 				null,
 				(txObject, resultSet) => {
 					if (resultSet.rows.length) {
-						dispacher(addTickets(resultSet.rows._array as Ticket[]));
+						dispatcher(addTickets(resultSet.rows._array as Ticket[]));
 					}
 				},
 				(txObject, err) => console.error(err)
@@ -119,7 +120,7 @@ const Dashboard = () => {
 								ticket={item}
 								showRightSection={selectMode}
 								rightSection={() => (
-									<Checkbox value={!!item?.selected} onChange={() => dispacher(selectedTicket(item))} />
+									<Checkbox value={!!item?.selected} onChange={() => dispatcher(selectedTicket(item))} />
 								)}
 								onLongPress={() => dispatch(selectTicketMode(!selectMode))}
 							/>
