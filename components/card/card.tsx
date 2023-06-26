@@ -1,9 +1,10 @@
-import { View, ViewProps, ViewStyle, StyleSheet } from 'react-native'
+import { View, ViewProps, ViewStyle, StyleSheet, Pressable } from 'react-native'
 
 import { useStyles } from "@hooks";
 
 export interface CardProps extends ViewProps {
 	style?: ViewStyle;
+	onLongPress?: () => void;
 }
 export const Card = (props: CardProps) => {
 	const styles = useStyles((theme, device) => {
@@ -19,8 +20,8 @@ export const Card = (props: CardProps) => {
 	const style = [styles.container, props.style];
 
 	return (
-		<View {...{...props, style}}>
+		<Pressable {...{...props, style}} onLongPress={props.onLongPress}>
 			{props.children}
-		</View>
+		</Pressable>
 	)
 }

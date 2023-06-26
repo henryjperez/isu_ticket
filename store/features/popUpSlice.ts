@@ -6,4 +6,4 @@ const popUpSlice = createSlice({
 	reducers: {},
 });
 
-export default popUpSlice.reducer;
+export default popUpSlice;

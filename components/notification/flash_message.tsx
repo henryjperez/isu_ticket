@@ -1,15 +1,16 @@
 import { useRef, useEffect } from "react";
 import { StyleSheet, View, Animated } from 'react-native';
+import { useSelector } from "react-redux";
 
 import { useStyles } from "@hooks";
 import { IconName } from "@interfaces";
 import { Text } from "@components/text";
 
 export interface FlashMessageProps {
-	onAnimationEnd: () => void;
+	onAnimationEnd?: () => void;
 	duration: number;
 	message: string;
-	iconName: IconName;
+	iconName?: IconName;
 	type?: "success" | "alert" | "info" | "error";
 }
 export const FlashMessage = (props: FlashMessageProps) => {
@@ -38,7 +39,7 @@ export const FlashMessage = (props: FlashMessageProps) => {
 
 	useEffect(() => {
 		const openAnimation = Animated.timing(viewPosition, {
-			toValue: { y: 80, x: 50 },
+			toValue: { y: 110, x: 50 },
 			useNativeDriver: true,
 			duration,
 		});

@@ -4,7 +4,9 @@ import { useRouter } from "expo-router";
 import { H2, Text } from "@components/text";
 import { Card } from "@components/card";
 import { Button } from "@components/button";
-import { useStyles } from "@hooks";
+import { CardProps } from "@interfaces";
+import { useStyles, useAppDispatch } from "@hooks";
+import { resetTicketsSelected } from "@actions";
 
 export interface Ticket {
 	id: number,
@@ -15,11 +17,18 @@ export interface Ticket {
 	longitude: number;
 	latitude: number;
 }
+export interface TicketSelect extends Ticket {
+	selected?: boolean;
+}
 export interface TicketCardProps {
-	ticket: Ticket;
+	ticket: TicketSelect;
+	rightSection?: (active?: boolean) => JSX.Element;
+	showRightSection?: boolean;
+	onLongPress?: CardProps["onLongPress"];
 }
 export const TicketCard = (props: TicketCardProps) => {
 	const { id, name, date, address, phone } = props.ticket;
+	const dispatch = useAppDispatch();
 	const router = useRouter();
 	const styles = useStyles((theme, device) => {
 		return StyleSheet.create({
@@ -33,12 +42,12 @@ export const TicketCard = (props: TicketCardProps) => {
 	});
 
 	function handleOnPress() {
-		// router.setParams({ id: String(id) });
 		router.push({ pathname: "work", params: {...props.ticket}});
+		dispatch(resetTicketsSelected());
 	}
 
 	return (
-		<Card style={styles.card}>
+		<Card style={styles.card} onLongPress={props.onLongPress}>
 			<View>
 				<H2>{name}</H2>
 				<Text>#{id}</Text>
@@ -46,9 +55,16 @@ export const TicketCard = (props: TicketCardProps) => {
 				<Text>{address}</Text>
 				<Text>{phone}</Text>
 			</View>
-			<View>
-				<Button width={100} onPress={handleOnPress}>View</Button>
-			</View>
+			{
+				!props.showRightSection && (
+					<View>
+						<Button width={100} onPress={handleOnPress}>View</Button>
+					</View>
+				)
+			}
+			{
+				props.showRightSection && props?.rightSection?.()
+			}
 		</Card>
 	)
 }
