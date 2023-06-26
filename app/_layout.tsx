@@ -109,12 +109,12 @@ export default function Layout() {
 														navProps.route.name !== "index" ?
 															<GoBackButton /> : <View style={{ width: HEADER_ICON_SIZE }} />
 													}
-													{
+													{/* {
 														navProps.route.name !== "login" &&
 														navProps.route.name !== "register" &&
 														navProps.route.name !== "new_ticket" &&
 														<Calendar />
-													}
+													} */}
 												</React.Fragment>
 											)
 										}}

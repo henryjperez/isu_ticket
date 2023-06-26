@@ -16,14 +16,14 @@ export async function requestCalendarPermission() {
 	if (status === 'granted') {
 		const calendars = await ExpoCalendar.getCalendarsAsync(ExpoCalendar.EntityTypes.EVENT);
 		console.log('Here are all your calendars:');
-		console.log({ calendars });
+		console.log(calendars[10]);
 	}
 }
 export const Calendar = (props: CalendarProps) => {
 
-	// useEffect(() => {
-	// 	requestCalendarPermission();
-	// }, []);
+	useEffect(() => {
+		requestCalendarPermission();
+	}, []);
 
 	
 	async function getDefaultCalendarSource() {
@@ -45,7 +45,7 @@ export const Calendar = (props: CalendarProps) => {
 			ownerAccount: 'personal',
 			accessLevel: ExpoCalendar.CalendarAccessLevel.OWNER,
 		});
-		console.log(`Your new calendar ID is: ${newCalendarID}`);
+		console.log(`Your new calendar ID is: ${newCalendarID}`, defaultCalendarSource);
 	}
 
 	return (
