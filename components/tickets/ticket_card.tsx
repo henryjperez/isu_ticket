@@ -5,7 +5,8 @@ import { H2, Text } from "@components/text";
 import { Card } from "@components/card";
 import { Button } from "@components/button";
 import { CardProps } from "@interfaces";
-import { useStyles } from "@hooks";
+import { useStyles, useAppDispatch } from "@hooks";
+import { resetTicketsSelected } from "@actions";
 
 export interface Ticket {
 	id: number,
@@ -27,6 +28,7 @@ export interface TicketCardProps {
 }
 export const TicketCard = (props: TicketCardProps) => {
 	const { id, name, date, address, phone } = props.ticket;
+	const dispatch = useAppDispatch();
 	const router = useRouter();
 	const styles = useStyles((theme, device) => {
 		return StyleSheet.create({
@@ -41,6 +43,7 @@ export const TicketCard = (props: TicketCardProps) => {
 
 	function handleOnPress() {
 		router.push({ pathname: "work", params: {...props.ticket}});
+		dispatch(resetTicketsSelected());
 	}
 
 	return (

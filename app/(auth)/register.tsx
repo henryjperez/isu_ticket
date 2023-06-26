@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { useDispatch } from "react-redux";
 
 import { Icon, H2, Input, Button } from "@components";
-import { useStyles, useDatabase } from "@hooks";
+import { useStyles, useDatabase, useNotification } from "@hooks";
 import { login } from "@store/actions";
 
 const RegisterScreen = () => {
@@ -11,6 +11,7 @@ const RegisterScreen = () => {
 	const [password, setPassword] = useState("");
 	const [username, setUsername] = useState("");
 	const dispatch = useDispatch();
+	const showNotification = useNotification();
 
 	function handleRegister() {
 		db.transaction(tx => {
@@ -20,10 +21,13 @@ const RegisterScreen = () => {
 				null,
 				(txObject, resultSet) => {
 					if (resultSet.insertId) {
+						showNotification({ message: "Login Successfully", duration: 500, type: "success" });
 						dispatch(login());
+					} else {
+						showNotification({ message: "User not created", duration: 500, type: "alert" });
 					}
 				},
-				(txObject, err) => console.error(err)
+				(txObject, err) => showNotification({ message: "Something happened", duration: 500, type: "error" })
 				);
 		});
 	}

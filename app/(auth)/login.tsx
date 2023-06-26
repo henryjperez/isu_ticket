@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import { StyleSheet, View } from 'react-native'
 import { useDispatch } from "react-redux";
 
-import { Input, Icon, H2, Button, FlashMessage } from "@components";
-import { useStyles, useDatabase } from "@hooks";
+import { Input, Icon, H2, Button } from "@components";
+import { useStyles, useDatabase, useNotification } from "@hooks";
 import { login } from "@store/actions";
 
 const LoginScreen = () => {
 	const db = useDatabase();
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const [notification, setNotification] = useState<string | null>(null);
 	const dispatch = useDispatch();
+	const showNotification = useNotification();
 
 
 	function handleLogin() {
@@ -22,12 +22,12 @@ const LoginScreen = () => {
 				null,
 				(txObject, resultSet) => {
 					if (resultSet.rows.length) {
-						setNotification("Login successful");
+						showNotification({message: "Login Successfully", duration: 500, type: "success"});
 						setTimeout(() => {
 							dispatch(login());
 						}, 500);
 					} else {
-						setNotification("User not found");
+						showNotification({ message: "User not found", duration: 500, type: "alert" });
 					}
 				},
 				(txObject, err) => console.error(err)
@@ -48,12 +48,7 @@ const LoginScreen = () => {
 	})
 	return (
 		<View style={styles.page}>
-			{
-				typeof notification === "string" && notification ?
-					// @ts-ignore
-					<FlashMessage message={notification} />
-				: null
-			}
+			
 			<Icon family='fw' name="user" size={100} />
 			{/* <H2>Login</H2> */}
 			<Input placeholder='username' value={username} onChangeText={setUsername} />

@@ -1,10 +1,12 @@
 import { useState, useCallback, useReducer } from "react";
 import { View, FlatList, StyleSheet, Pressable } from 'react-native'
-import { useFocusEffect } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 
 import { TicketCard, Checkbox, H1, Button } from "@components";
-import { useDatabase, useStyles } from "@hooks";
-import { Ticket, TicketSelect } from "@interfaces";
+import { useDatabase, useStyles, useAppDispatch, useAppSelector } from "@hooks";
+import { Ticket, TicketSelect, AppDispatch } from "@interfaces";
+import { selectTicket, selectTicketMode } from "@actions";
+import { isEmptyObject } from "@utils";
 
 
 interface DispatchAction {
@@ -16,21 +18,23 @@ const types = {
 	deselected: "DESELECTED",
 	add: "ADD",
 }
-const reducer = (state: TicketSelect[], action: DispatchAction): TicketSelect[] => {
+const reducer = (state: TicketSelect[], action: DispatchAction, dispatch: AppDispatch): TicketSelect[] => {
 	const { payload, type } = action;
 	switch (type) {
 		case types.selected:
 			return state.map((ticket) => {
 				// @ts-ignore
 				if (ticket.id === payload?.id) {
-					return { ...ticket, selected: !ticket?.selected };
+					const newTicket = { ...ticket, selected: !ticket?.selected };
+					dispatch(selectTicket(newTicket));
+					return newTicket;
 				} else {
 					return ticket;
 				}
 			});
 		
 		case types.add:
-			const newState = [...state, ...payload as Ticket[]];
+			const newState = [...payload as Ticket[]];
 			return newState;
 
 		default:
@@ -48,9 +52,11 @@ const selectedTicket = (payload: TicketSelect) => ({
 });
 
 const Dashboard = () => {
-	const [showSelectTickets, setShowSelectTickets] = useState(false);
-	const [tickets, dispacher] = useReducer(reducer, []);
+	const dispatch = useAppDispatch();
+	const [tickets, dispacher] = useReducer((state: any, action: any) => reducer(state, action, dispatch), []);
+	const { selected: selectedTickets, selectMode } = useAppSelector(state => state.tickets);
 	const db = useDatabase();
+	const router = useRouter();
 	const styles = useStyles((theme, device) => {
 		return StyleSheet.create({
 			page: {
@@ -80,13 +86,16 @@ const Dashboard = () => {
 				(txObject, err) => console.error(err)
 			);
 		});
-
-
 	}, []));
 
+	function handleViewSelect() {
+		router.push("work");
+		dispatch(selectTicketMode(false));
+	}
+
 	function handleReleaseSelect() {
-		if (showSelectTickets) {
-			setShowSelectTickets(false);
+		if (selectMode) {
+			dispatch(selectTicketMode(false));
 		}
 	}
 
@@ -94,10 +103,10 @@ const Dashboard = () => {
 		<Pressable onPress={handleReleaseSelect}>
 			<View style={styles.page}>
 				{
-					showSelectTickets && (
+					selectMode && (
 						<View style={styles.selectTitleContainer}>
 							<H1>Select Tickets</H1>
-							<Button disabled width={100} height={50}>View</Button>
+							<Button width={100} height={50} disabled={isEmptyObject(selectedTickets)} onPress={handleViewSelect}>View</Button>
 						</View>
 					)
 				}
@@ -108,11 +117,11 @@ const Dashboard = () => {
 						return (
 							<TicketCard
 								ticket={item}
-								showRightSection={showSelectTickets}
+								showRightSection={selectMode}
 								rightSection={() => (
 									<Checkbox value={!!item?.selected} onChange={() => dispacher(selectedTicket(item))} />
 								)}
-								onLongPress={() => setShowSelectTickets(!showSelectTickets)}
+								onLongPress={() => dispatch(selectTicketMode(!selectMode))}
 							/>
 						);
 					}}

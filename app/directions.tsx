@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from 'react-native'
 import MapView, { Marker, Polyline } from 'react-native-maps';
+import { useSearchParams } from "expo-router";
 // to use the google maps api to draw directions in the map
 // use this library "react-native-maps-directions" but it need an API KEY of Google
 
-import { useStyles } from "@hooks";
+import { useStyles, useAppSelector } from "@hooks";
+import { isEmptyObject } from "@utils";
 
 const Directions = () => {
 	const [origin, setOrigin] = useState({ latitude: 43.47660678006097, longitude: -80.48593148811405, });
 	const [destination, setDestination] = useState({ latitude: 43.44556211523661, longitude: -80.57963233187134 });
+	const { latitude, longitude } = useSearchParams();
+	const selectedTickets = useAppSelector(state => state.tickets.selected);
 
 	const styles = useStyles((theme, device) => {
 		return StyleSheet.create({
@@ -23,6 +27,19 @@ const Directions = () => {
 			},
 		});
 	})
+	
+	useEffect(() => {
+		if (isEmptyObject(selectedTickets)) {
+			// @ts-ignore
+			setDestination({latitude, longitude});
+		} else {
+			const arrayTickets = Object.keys(selectedTickets).map((key) => selectedTickets[key]);
+			if (arrayTickets.length > 0) {
+				setDestination({ latitude: arrayTickets?.[0]?.latitude, longitude: arrayTickets?.[0]?.longitude });
+			}
+		}
+	}, []);
+	
 	return (
 		<View style={styles.container}>
 			<MapView

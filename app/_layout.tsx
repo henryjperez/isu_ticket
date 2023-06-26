@@ -15,7 +15,7 @@ import {
 	Icon,
 	Calendar,
 	Auth,
-	LogoutMenuOption,
+	CustomOptionsSection,
 	FlashMessageWrapper } from "@components";
 import { HEADER_ICON_SIZE, routes } from "@utils";
 import { Provider } from "@store";
@@ -80,12 +80,14 @@ export default function Layout() {
 															<React.Fragment>
 																{
 																	routes.map((route, index) => {
+																		const path = route.path === "index" ? "/" : route.path;
+
 																		if (route.path == navProps.route.name) {
 																			return null;
 																		}
 																		return (
 																			<MenuOption
-																				onPress={() => navigateHandler(route.path)}
+																				onPress={() => navigateHandler(path)}
 																				key={`${route.name}-${route.path}-${index}`}
 																			>
 																				{route.name}
@@ -93,7 +95,7 @@ export default function Layout() {
 																		);
 																	})
 																}
-																<LogoutMenuOption />
+																<CustomOptionsSection currentRoute={navProps.route.name} />
 															</React.Fragment>
 														</Menu>
 													)}
