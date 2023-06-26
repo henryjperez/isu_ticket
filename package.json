@@ -17,6 +17,7 @@
 		"@reduxjs/toolkit": "1.9.5",
 		"expo": "~48.0.18",
 		"expo-calendar": "~11.1.1",
+		"expo-checkbox": "~2.3.1",
 		"expo-font": "~11.1.1",
 		"expo-linking": "~4.0.1",
 		"expo-router": "^1.5.2",

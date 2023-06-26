@@ -1,7 +1,6 @@
-import { useEffect } from 'react'
 import { StyleSheet, View } from 'react-native';
 import { useRouter } from "expo-router";
-import { useDispatch } from "react-redux";
+import { Checkbox } from "expo-checkbox";
 
 import { Button, Icon, H1, Text } from "@components";
 import { useStyles } from "@hooks";

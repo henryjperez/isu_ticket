@@ -5368,6 +5368,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-checkbox@npm:~2.3.1":
+  version: 2.3.1
+  resolution: "expo-checkbox@npm:2.3.1"
+  checksum: f096de7a84a9c940ba9fa80b30dd2247c2b4271e476428e4c8a3d95add3013bd35d4eb5a7190f4b6209ba2e877b6203c0b8da8271b738b15b3826bcb7e842a19
+  languageName: node
+  linkType: hard
+
 "expo-constants@npm:~14.2.0, expo-constants@npm:~14.2.1":
   version: 14.2.1
   resolution: "expo-constants@npm:14.2.1"
@@ -7010,6 +7017,7 @@ __metadata:
     babel-plugin-module-resolver: 5.0.0
     expo: ~48.0.18
     expo-calendar: ~11.1.1
+    expo-checkbox: ~2.3.1
     expo-font: ~11.1.1
     expo-linking: ~4.0.1
     expo-router: ^1.5.2
