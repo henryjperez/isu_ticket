@@ -1,115 +1,73 @@
-# isu_ticket
-a test project of React Native
+# ISU Ticket
+A React Native Project for saving and showing tickets locally
 
-# Document
+# Summary
+- [Stack](#stack)
+- [Features](#features)
+- [Considerations](#considerations)
 
-## Technical specifications
-
-- Native or Kotlin is required for this test App
-• It is required the use of architecture and design patterns
-• Application needs to be optimized for tablets with 10 Inches, however it needs to be responsive in order to operate with other resolutions
-
-• The android application needs to work with a local SQL Lite database structure  • The application needs to be able to demonstrate add, modify and delete records  • The application code needs to be submitted with proper in code comments and  documentation in English.
-
-• For the address location user story, we will be reviewing a proper google maps API  integration
-
-• When submitted the project to ISUCorp, provide the code and the APK so we can run the application
-
-# Process
-
-## Project Init
-
-I used Expo as the tool for creating the app. Not only avoids the boilerplate of a React Native, but also it’s desirable at this point. You can checkout this [article](https://retool.com/blog/expo-cli-vs-react-native-cli/) for more information.
-
-### Stack
-
-- Typescript
+# Stack
 - Expo
+- Typescript
+- Redux (Redux Toolkit)
+- React Native Maps
+- React Native Calendars
+- SQLite
 
-The reason for choosing Expo instead of React Native CLI is not only convenience but also because Expo, as a development tool, has grown a lot over the couple of years and now it’s the best way to initialize and continue a React Native Project.
+## Justifications
+### Expo
+I used Expo as the tool for creating the app. Not only avoids the boilerplate of a React Native project, but also it’s recomended at this point. You can checkout this [article](https://retool.com/blog/expo-cli-vs-react-native-cli/) for more information.
 
-For more information you can check this article that talk about this: [https://retool.com/blog/expo-cli-vs-react-native-cli/](https://retool.com/blog/expo-cli-vs-react-native-cli/)
+### Typescript
+Offers a type system on top of Javascript. This is useful for intellisense in the code editor, scaling the code and making the development process more descriptive and explicit.
 
-And, the reason for using Typescript was 
+### Redux
+Using Redux in a "small" project like this could be seen as an "overkill", but since I structure the code to be scalable and also it was needed to create a communication between screens and components, I though I may as well use Redux for a more robust project.
 
-## Considerations
+Redux Toolkit is the recommended way to write redux logic since eliminates a lot of redux's boilerplate and add useful feature of the same ecosystem like async functions out of the box.
 
-### Directions
+### React Native Maps
+It uses "Google Maps" for Android and "Apple Maps" for IOS. It simple and easy to use. But there's a consideration to make regarding this.
 
-To have a more accurate reading of the direction in the map, and not just a strait line, it’s necessary to set the API key of Google Maps.
+For using this library in Android you must have an google API_KEY, or else the app will crash when opening the map.
 
-### Map initial coordinates
+### React Native Calendars
+Offers a customizable and rich components related to dates like day picker or an agenda.
 
-Since there’s no much data, I used the coordinates of the surroundings of ISU CORP in Canada. But it can be replace with actual data easily. 
+### SQLite
+It was a local integration with Expo with the package `expo-sqlite` and it relative easy to use without compromising the core features of any SQL database.
 
-### Data
-
-The data used in this app is dummy data, it needs coordination about API integrations and all kind of stuff.
-
-### Poor implementation of the Local database
-
-The database integration is the worse part of the app. It created a mess between the files and it was an unpleasant coding experience.
-
-### Not global context
-
-For this project I didn’t make use of a Redux nor React Context. For these case it works, but it’s something to keep in mind.
-
-## Pros and Cons
-
-### Cons
-
-- At the end of the project, for reasons of time, I didn’t pay as much attention to details as I should
-- The interface is not something that a mature product would display, so it needs to be improved
-- Too many files for the size of the project
-
-### Props
-
-- The structure and organization of the project. It makes a separation of concerns between different parts of the code. Typescript helps a lot with that.
-- Scalable. This is a word that many people use now days, but what I need by “scalable” is the integration between the components.
-- Although I have many libraries from the expo init command, the application doesn’t need too many dependencies to work and the dependencies are often part of the same ecosystem (expo) which simplify a lot of things
-- Not bad for two days of coding
-
-## Features
-
-- Register
-- Login
-- Create ticket
-- Delete ticket
-- Visualize tickets
-- Map view
-    - Drag the Pin Markers in the app
-    - Path between two points
-- Portrait and Landscape device orientation
-- Notification component
-- Header menu
-    - Go back
-    - new ticket (in dashboard)
-    - Dropdown menu
-- Darkmode / Lightmode detection
-    - Light mode colors
-    - Dark mode colors
-    - Hooks integration for easy use
-
-### Missing features
-
-- Calendar sync
-- Update tickets
-- Working Screen buttons
-- Input validation
-- Code commenting
-
-# Code specifics
-
-The applications uses alises to for the most important folders of the project, this allows easier importing of components, which connects them and improve the communications between the components.
-
-It’s important to create easy to implement, easy to extend components for the flexibility of the platform. So, if you are planning to continue the code, you need to create components more “open” to changes. That require making components less “hyper” with a bunch of props that will be passed to other components and more like letting decide the parent component decide what the content will have. For an example, see the `header.tsx` component and how it allows of other icons in it without too much harzard.
-
+# Features
+- Dark mode / light mode DETECTION
+- User registry
+- User Login
 ---
+- Notifications messages display
+- Menu dropdown in header
+- Navigation between screens
+- Auth: login / logout
+---
+- Create Ticket
+- View Ticket
+- Delete Ticket
+---
+- Working ticket screen: View Ticket details
+- Working tickets displays 1 or multiple tickets
+- Checkbox select in dashboard to see more than 1 ticket details in working screen
+- Data Validation while creating a ticket
+---
+- View Map
+- Change coordinates of the point in the map (no coordinates saving yet)
 
-## Automation
+# Considerations
+## Map View (Important)
+The app will crash on android. This is no an error on code but with the credentials that the library needs to display the map.
 
-It needs to take advantage of tools like “github actions” to automate some repetitive tasks, like compiling the .apk file.
+On Android, you need to set the **API KEY** of Google Maps to be able to use it in Google Play Store or even as an .apk
 
-## Bundle size
+## .apk Compilation
+At the moment for compiling the app in Android it relies on an Expo service called "eas".
 
-Although it’s too early to say, in the future it may be a good idea to implement “Proguard” to reduce the bundle size. I must say that the app uses “Hermes” by default.
+For compiling the app locally use the command `expo prebuild`.
+
+And here is a [guide](https://dev.henryjperez.com/gh-actions-react-native-android) a automate that compilation using **GitHub Actions**. 
